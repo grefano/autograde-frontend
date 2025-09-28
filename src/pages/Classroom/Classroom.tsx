@@ -1,13 +1,9 @@
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import "./Classroom.css"
-interface Isubmission {
-    lang: 'py' | 'c'
-    code: string
-}
 
 export default function Classroom(){
-    const [submissions, setSubmissions] = useState<any[]>([])
+    // const [submissions, setSubmissions] = useState<any[]>([])
     const [members, setMembers] = useState<string[]>([])
     const {password} = useParams()
     const navigate = useNavigate()
@@ -20,7 +16,7 @@ export default function Classroom(){
         })
         const data = await response.json()
         console.log(data)
-        setSubmissions(data.submissions)
+        // setSubmissions(data.submissions)
         setMembers(data.members)
     }
     useEffect(() => {

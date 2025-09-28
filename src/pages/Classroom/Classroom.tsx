@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 
 interface Isubmission {
     lang: 'py' | 'c'
@@ -9,11 +9,12 @@ interface Isubmission {
 export default function Classroom(){
     const [submissions, setSubmissions] = useState([])
     const {password} = useParams()
+    const navigate = useNavigate()
 
     const fetchSubmissions = async () => {
         const response = await fetch(import.meta.env.VITE_SERVER_URL+'api/class/submission', {
             headers: {
-                'Authorization': `Bearer ${localStorage.getItem('classpassword')} ${localStorage.getItem('tokenteacher')}`
+                'Authorization': `Bearer ${localStorage.getItem('tokenteacher')}`
             }
         })
         const data = await response.json()
@@ -28,12 +29,24 @@ export default function Classroom(){
         fetch(import.meta.env.VITE_SERVER_URL+'api/class/close', {
             method: 'PATCH',
             headers: {
-                'Authorization': `Bearer ${password} ${localStorage.getItem('tokenteacher')}`
+                'Authorization': `Bearer ${localStorage.getItem('tokenteacher')}`
+            }
+        }).then(response => response.json()).then(data => {
+            console.log('finish, data: ', data)
+        })
+    }
+    const handleDelete = () => {
+        fetch(import.meta.env.VITE_SERVER_URL+'api/class', {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('tokenteacher')}`
             }
         })
+        navigate('/')
     }
 
     return (<>
+        <button onClick={handleDelete}>fechar sala</button>
         <h1>{password}</h1>
         {submissions.length && submissions.map((value: Isubmission) => {
             <div>{value.lang}</div>

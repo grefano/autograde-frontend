@@ -1,24 +1,27 @@
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
-
+import "./Classroom.css"
 interface Isubmission {
     lang: 'py' | 'c'
     code: string
 }
 
 export default function Classroom(){
-    const [submissions, setSubmissions] = useState([])
+    const [submissions, setSubmissions] = useState<any[]>([])
+    const [members, setMembers] = useState<string[]>([])
     const {password} = useParams()
     const navigate = useNavigate()
 
     const fetchSubmissions = async () => {
-        const response = await fetch(import.meta.env.VITE_SERVER_URL+'api/class/submission', {
+        const response = await fetch(import.meta.env.VITE_SERVER_URL+'api/class', {
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('tokenteacher')}`
             }
         })
         const data = await response.json()
-        setSubmissions(data)
+        console.log(data)
+        setSubmissions(data.submissions)
+        setMembers(data.members)
     }
     useEffect(() => {
         fetchSubmissions()
@@ -46,11 +49,16 @@ export default function Classroom(){
     }
 
     return (<>
-        <button onClick={handleDelete}>fechar sala</button>
-        <h1>{password}</h1>
-        {submissions.length && submissions.map((value: Isubmission) => {
-            <div>{value.lang}</div>
-        })}
-        <button onClick={handleFinish}>Finalizar Envios</button>
+        <button onClick={handleDelete} className="btn-icon font-gg material-symbols-rounded">close_small</button>
+        <div id='ctn-page-classroom'>
+            <h1 className="font-gg color-dark" style={{margin: '0'}}>{password}</h1>
+            <button onClick={handleFinish} className="btn-main font-m color-dark" style={{marginTop: '20px'}}>Finalizar Envios</button>
+            <h2 style={{margin: 0, marginTop: '50px'}} className="color-dark font-m">Membros</h2>
+            <div id='ctn-members-joined'>
+                {members.map((value: string) => (
+                    <span className="font-p color-dark ">{value}</span>
+                ))}
+            </div>
+      </div>
     </>)
 }

@@ -23,8 +23,7 @@ function CreateClassroom(){
     }
 
     return (<>
-        {/* <input type="text" onChange={(e) => setPassword(e.target.value)}/> */}
-        <button onClick={handleCreate}>Create</button>
+        <button onClick={handleCreate} className="btn-main font-g">Criar sala de aula</button>
     </>)
 }
 

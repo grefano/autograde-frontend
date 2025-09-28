@@ -1,0 +1,17 @@
+#ctn-page-classroom{
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    flex-direction: column;
+}
+
+#ctn-members-joined{
+    display: flex;
+    row-gap: 10px;
+    column-gap: 20px;
+    flex-wrap: wrap;
+    align-items: start;
+    justify-content: center;
+    width: calc(var(--font-m) * 10);
+    max-width: 100%;
+}

@@ -1,8 +1,11 @@
 import CreateClassroom from "../../components/create_classroom/CreateClassroom"
+import "./Home.css"
 
 function Home(){
 
-    return (<CreateClassroom/>)
+    return (<div id='ctn-page-home'>
+        <CreateClassroom/>
+    </div>)
 }
 
 export default Home

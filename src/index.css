@@ -1,6 +1,8 @@
 
 *{
     font-family: "Lexend";
+    margin: 0;
+    padding: 0;
 }
 
 :root{
@@ -61,10 +63,14 @@
 
 pre[class*="language-"]{
     /* background: transparent !important; */
-    font-family: "Jetbrains Mono";
     box-shadow: none;
+    border: none;
+    max-height: 150px;
+    max-width: 450px;
+    margin-bottom: 0;
 }
 
 code[class*="language-"]{
     text-shadow: none;
+    font-family: "Jetbrains Mono";
 }

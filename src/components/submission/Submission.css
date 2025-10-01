@@ -1,10 +1,15 @@
-#ctn-submission{
-    border-style: solid;
-    border-color: var(--color-dark);
-    background-color: rgb(245, 245, 245);
-    border-width: 5px;
-    border-radius: 20px;
-    box-shadow: 5px 5px 10px rgb(214, 214, 214);
-    padding: 10px;
+
+
+#submission-title{
+    padding-left: 5px;
+    color: var(--color-dark);
+}
+
+#ctn-submission pre{
+    margin-bottom: 0;
+}
+
+#ctn-submission pre{
+    box-shadow: 8px 8px 8px rgb(212, 212, 212);
 
 }

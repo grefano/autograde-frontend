@@ -7,6 +7,7 @@ import Classroom from './pages/Classroom/Classroom.tsx'
 
 import './index.css'
 
+
 const router = createBrowserRouter([
   {
     path: "/",

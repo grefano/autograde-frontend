@@ -1,5 +1,6 @@
+
 *{
-    font-family: Lexend;
+    font-family: "Lexend";
 }
 
 :root{
@@ -10,6 +11,7 @@
     --transition-timing: cubic-bezier(0,1,.25,1);
     --transition-duration: 0.5s;
     --color-dark: rgb(61, 53, 42);
+    --font-code: "JetBrains Mono";
     /* --color-dark: rgb(36, 30, 23); */
 }
 
@@ -55,4 +57,14 @@
 
 .btn-icon:hover{
     color: rgb(121, 99, 83);
+}
+
+pre[class*="language-"]{
+    /* background: transparent !important; */
+    font-family: "Jetbrains Mono";
+    box-shadow: none;
+}
+
+code[class*="language-"]{
+    text-shadow: none;
 }

@@ -2,17 +2,20 @@
 import "./Submissions.css"
 
 
-
-
-// const fetch_submissions = async () => {
-//     const response = await axios.get(import.meta.env.VITE_SERVER_URL + `api/class/submissions`)
-// }
-
-function Submissions(){
+import type { ISubmission } from "../../util/types"
+import Submission from "../submission/Submission"
+interface Props {
+    submissions: ISubmission[]
+}
+function Submissions({submissions}: Props){
     
-    
+    console.log(submissions)
 
-    return (<>admwaddjwad</>)
+    return (<div id='ctn-submissions'>
+        {submissions.map(submission => (
+            <Submission {...submission} />
+        ))}
+    </div>)
 }
 
 

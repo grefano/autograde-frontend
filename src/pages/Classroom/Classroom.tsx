@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import "./Classroom.css"
+import Submissions from "../../components/submissions/Submissions"
 
 export default function Classroom(){
-    // const [submissions, setSubmissions] = useState<any[]>([])
+    const [submissions, setSubmissions] = useState<any[]>([])
     const [members, setMembers] = useState<string[]>([])
     const {password} = useParams()
     const navigate = useNavigate()
@@ -16,7 +17,7 @@ export default function Classroom(){
         })
         const data = await response.json()
         console.log(data)
-        // setSubmissions(data.submissions)
+        setSubmissions(data.submissions)
         setMembers(data.members)
     }
     useEffect(() => {
@@ -55,6 +56,7 @@ export default function Classroom(){
                     <span className="font-p color-dark ">{value}</span>
                 ))}
             </div>
+            <Submissions submissions={submissions}/> 
       </div>
     </>)
 }

@@ -15,3 +15,19 @@
     width: calc(var(--font-m) * 10);
     max-width: 100%;
 }
+
+#ctn-page-classroom pre[class*="language-"]{
+    /* background: transparent !important; */
+    box-shadow: none !important;
+    border: none !important;
+    max-height: 150px !important;
+    max-width: 450px !important;
+    margin-bottom: 0 !important;
+    scrollbar-color: white transparent !important;
+    scrollbar-width: thin !important;
+}
+
+code[class*="language-"]{
+    text-shadow: none !important;
+    font-family: "Jetbrains Mono" !important;
+}

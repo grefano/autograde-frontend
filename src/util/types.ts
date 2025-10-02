@@ -1,5 +1,6 @@
 export interface ISubmission {
     lang: string,
     code: string,
-    owner: string
+    owner_token: string,
+    owner_name: string
 }

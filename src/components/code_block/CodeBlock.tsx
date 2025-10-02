@@ -4,6 +4,8 @@ import 'prismjs/components/prism-python.js'
 
 import { useEffect } from 'react'
 
+
+
 interface Props{
     code: string,
     language: string

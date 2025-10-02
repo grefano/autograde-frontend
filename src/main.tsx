@@ -4,8 +4,10 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 import Home from './pages/Home/Home.tsx'
 import Classroom from './pages/Classroom/Classroom.tsx'
+import { ProviderClassroom } from './ContextClassroom.tsx'
 
 import './index.css'
+import Code from './pages/Code/Code.tsx'
 
 
 const router = createBrowserRouter([
@@ -14,8 +16,12 @@ const router = createBrowserRouter([
     element: (<Home/>)
   },
   {
-    path: "/classroom/:password",
-    element: (<Classroom/>)
+    path: "/classroom/:paramPassword",
+    element: (<ProviderClassroom><Classroom/></ProviderClassroom>)
+  },
+  {
+    path: "/classroom/:paramPassword/code",
+    element: (<ProviderClassroom><Code/></ProviderClassroom>)
   }
 ])
 

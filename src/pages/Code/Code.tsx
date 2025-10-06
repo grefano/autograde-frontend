@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom"
-import CodeBlock from "../../components/code_block/CodeBlock"
 import { useClassroom } from "../../ContextClassroom"
 import './Code.css'
 

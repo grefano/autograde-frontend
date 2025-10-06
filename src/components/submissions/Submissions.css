@@ -7,3 +7,11 @@
     margin-top: 50px;
 }
 
+#ctn-submissions-ignored{
+    display: flex;
+    column-gap: 50px;
+    flex-wrap: wrap;
+    width: 95%;
+    justify-content: center;
+    margin-top: 40px;
+}

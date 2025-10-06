@@ -5,6 +5,20 @@
     color: var(--color-dark);
 }
 
+#ctn-submission-header{
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+}
+
+#submission-btn-ignore{
+    font-size: 30pt;
+    padding: 0;
+    margin-bottom: calc(var(--font-p) * -.3);
+}
+
+
+
 #ctn-submission pre{
     margin-bottom: 0;
 }

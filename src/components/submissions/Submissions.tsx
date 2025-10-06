@@ -11,11 +11,21 @@ function Submissions({submissions}: Props){
     
     console.log(submissions)
 
-    return (<div id='ctn-submissions'>
-        {submissions.map(submission => (
-            <Submission {...submission} />
-        ))}
-    </div>)
+
+
+    return (<><div id='ctn-submissions'>
+            {submissions.map((submission, index) => (
+                ( submission.view_state == 'pending' ? <Submission {...submission} index={index}/> : null )
+            ))}
+        </div>
+        {/* <div id='ctn-submissions-ignored'>
+            {submissions.map((submission, index) => (
+                ( submission.view_state == 'ignored' ? <Submission {...submission} index={index}/> : null)  
+            ))}
+
+        </div> */}
+    </>
+    )
 }
 
 

@@ -8,7 +8,8 @@ interface IContextClassroom{
     submission_selected: null | ISubmission,
     password: null | string,
     setPassword: Dispatch<SetStateAction<string | null>>,
-    handle_view_submission: (submission: ISubmission) => void
+    handle_view_submission: (submission: ISubmission) => void,
+    handle_ignore: (index: number) => void
 }
 const ContextClassroom = createContext<IContextClassroom | null>(null)
 
@@ -29,19 +30,57 @@ export function ProviderClassroom({children}: PropsProvider){
     const [submissionSelected, setsubmissionSelected] = useState<null | ISubmission>(null)
     const [password, setPassword] = useState<null | string>(null)
     const navigate = useNavigate()
+    
+    // const setSubmissionWhen = (callbackFn: (prev: ISubmission[], checkval: ISubmission) => boolean) => {
+    //     setSubmissions((previousValue) => {
+    //         const newsubmissions = (data.submissions as ISubmission[]).reduce((acc: ISubmission[], val) => {
+                
+    //             if (callbackFn(previousValue, val)) {
+    //                 acc.push({...val, view_state: 'pending'})
+    //             }
+    //             return acc
+                
+    //         }, [])
+    //         console.log('new submissions', newsubmissions)
+
+    //         return [...previousValue, ...newsubmissions]
+    //     })
+    // }
 
     const fetchSubmissions = async () => {
+        
         const response = await fetch(import.meta.env.VITE_SERVER_URL+'api/class', {
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('tokenteacher')}`
             }
         })
         const data = await response.json()
-        console.log(data)
-        setSubmissions(data.submissions)
+        
+        // setSubmissionWhen((previousValue) => {
+        //     let existe = previousValue.some(item => {
+        //         return item.owner_token == val.owner_token && item.created == val.created
+        //     })
+        // })
+        setSubmissions((previousValue) => {
+            const newsubmissions = (data.submissions as ISubmission[]).reduce((acc: ISubmission[], val) => {
+                let existe = previousValue.some(item => {
+                    return item.owner_token == val.owner_token && item.created == val.created
+                })
+                console.log(existe)
+                if (!existe) {
+                    acc.push({...val, view_state: 'pending'})
+                }
+                return acc
+                
+            }, [])
+            console.log('new submissions', newsubmissions)
+
+            return [...previousValue, ...newsubmissions]
+        })
         setMembers(data.members)
     }
     useEffect(() => {
+        console.log('de novo')
         fetchSubmissions()
         const intervalId = setInterval(fetchSubmissions, 4000)
         return () => clearInterval(intervalId)
@@ -55,9 +94,16 @@ export function ProviderClassroom({children}: PropsProvider){
         password,
         setPassword,
         handle_view_submission: (submission: ISubmission) => {
-            setsubmissionSelected(submission)
-
+            setsubmissionSelected({...submission})
+            setSubmissions(oldstate => (oldstate.map((value) => (
+                (value.owner_token == submission.owner_token && value.created == submission.created ? {...value, view_state: 'seen'} : value)
+            ))))
             navigate('/classroom/'+password+'/code')
+        },
+        handle_ignore: (index: number) => {
+            setSubmissions(oldstate => (oldstate.map((value, i) => (
+                (index == i ? {...value, view_state: 'ignored'} : value)
+            ))))
         }
     }
     console.log(value)
